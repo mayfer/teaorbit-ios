@@ -9,6 +9,7 @@
 #import "TOViewController.h"
 
 @interface TOViewController ()
+@property (strong, nonatomic) IBOutlet UIWebView *TOWebView;
 
 @end
 
@@ -17,8 +18,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
+	NSString *fullURL = @"http://teaorbit.com";
+    NSURL *url = [NSURL URLWithString:fullURL];
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    [_TOWebView loadRequest:requestObj];}
 
 - (void)didReceiveMemoryWarning
 {
