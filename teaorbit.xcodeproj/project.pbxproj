@@ -22,6 +22,8 @@
 		FB339DBB1859935900378A71 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB339D9A1859935900378A71 /* UIKit.framework */; };
 		FB339DC31859935900378A71 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB339DC11859935900378A71 /* InfoPlist.strings */; };
 		FB339DC51859935900378A71 /* teaorbitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FB339DC41859935900378A71 /* teaorbitTests.m */; };
+		FB339DD2185D2FC900378A71 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = FB339DD0185D2FC900378A71 /* WebViewJavascriptBridge.js.txt */; };
+		FB339DD3185D2FC900378A71 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = FB339DD1185D2FC900378A71 /* WebViewJavascriptBridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,9 @@
 		FB339DC01859935900378A71 /* teaorbitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "teaorbitTests-Info.plist"; sourceTree = "<group>"; };
 		FB339DC21859935900378A71 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FB339DC41859935900378A71 /* teaorbitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = teaorbitTests.m; sourceTree = "<group>"; };
+		FB339DCF185D2FC900378A71 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		FB339DD0185D2FC900378A71 /* WebViewJavascriptBridge.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebViewJavascriptBridge.js.txt; sourceTree = "<group>"; };
+		FB339DD1185D2FC900378A71 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +89,7 @@
 		FB339D8A1859935900378A71 = {
 			isa = PBXGroup;
 			children = (
+				FB339DCE185D2FC800378A71 /* WebViewJavascriptBridge */,
 				FB339D9C1859935900378A71 /* teaorbit */,
 				FB339DBE1859935900378A71 /* teaorbitTests */,
 				FB339D951859935900378A71 /* Frameworks */,
@@ -153,6 +159,17 @@
 				FB339DC11859935900378A71 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FB339DCE185D2FC800378A71 /* WebViewJavascriptBridge */ = {
+			isa = PBXGroup;
+			children = (
+				FB339DCF185D2FC900378A71 /* WebViewJavascriptBridge.h */,
+				FB339DD0185D2FC900378A71 /* WebViewJavascriptBridge.js.txt */,
+				FB339DD1185D2FC900378A71 /* WebViewJavascriptBridge.m */,
+			);
+			name = WebViewJavascriptBridge;
+			path = teaorbit/WebViewJavascriptBridge;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB339DD2185D2FC900378A71 /* WebViewJavascriptBridge.js.txt in Resources */,
 				FB339DAD1859935900378A71 /* Main_iPad.storyboard in Resources */,
 				FB339DB21859935900378A71 /* Images.xcassets in Resources */,
 				FB339DAA1859935900378A71 /* Main_iPhone.storyboard in Resources */,
@@ -255,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB339DB01859935900378A71 /* TOViewController.m in Sources */,
+				FB339DD3185D2FC900378A71 /* WebViewJavascriptBridge.m in Sources */,
 				FB339DA31859935900378A71 /* main.m in Sources */,
 				FB339DA71859935900378A71 /* TOAppDelegate.m in Sources */,
 			);
@@ -475,6 +494,7 @@
 				FB339DCA1859935900378A71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FB339DCB1859935900378A71 /* Build configuration list for PBXNativeTarget "teaorbitTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +503,7 @@
 				FB339DCD1859935900378A71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
