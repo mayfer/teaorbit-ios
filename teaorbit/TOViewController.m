@@ -30,6 +30,8 @@
         NSLog(@"Received message from javascript: %@", data);
         responseCallback(@"Right back atcha");
     }];
+    
+     _TOWebView.delegate = self;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -48,6 +50,84 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
+ navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSMutableDictionary *customHeaders = [NSMutableDictionary dictionary];
+    [customHeaders setObject:@"iPhoneTeaOrbit" forKey:@"X-Requested-By"];
+    
+    // if we have no custom headers to set, just let the request load as normal
+    if(customHeaders.count == 0)
+    {
+        return YES;
+    }
+    
+    // use this flag to track if all custom headers have been set on the request object
+    BOOL allHeadersProcessed = YES;
+    
+    // iterate through all specified custom headers
+    for(NSString *customKey in [customHeaders allKeys])
+    {
+        // grab the value associated with the custom header
+        NSString *customValue = (NSString *)[customHeaders objectForKey:customKey];
+        
+        // use this flag to mark if the custom header/value already exist on the request
+        BOOL customHeaderProcessed = NO;
+        
+        // iterate through all the keys in the request
+        for(NSString *existingKey in [[request allHTTPHeaderFields] allKeys])
+        {
+            // only compare keys which match (ignoring case as the UIWebView may alter case between requests)
+            if([customKey caseInsensitiveCompare:existingKey] == NSOrderedSame)
+            {
+                // grab the value for the existing key - both key and value must match
+                NSString *existingValue = (NSString *)[request valueForHTTPHeaderField:existingKey];
+                
+                // if we have a match here, then key and value match
+                if([customValue isEqualToString:existingValue])
+                {
+                    // mark this custom header as being processed
+                    customHeaderProcessed = YES;
+                    
+                    // no point in looking through other existing headers when we've found a match
+                    break;
+                }
+            }
+        }
+        
+        // if this particular custom header hasn't been processed, then mark that not all headers have been processed
+        if(customHeaderProcessed == NO)
+        {
+            allHeadersProcessed = NO;
+            break;
+        }
+    }
+    
+    // if all headers exist on the request, no modification is necessary
+    if(allHeadersProcessed)
+        return YES;
+    
+    // otherwise, we need to cancel the existing request and create a new (mutable) one
+    NSMutableURLRequest *mutableRequest = [request mutableCopy];
+    
+    // for each custom header
+    for(NSString *key in [customHeaders allKeys])
+    {
+        // grab the value needing set
+        NSString *value = [customHeaders valueForKey:key];
+        
+        // set the value to the custom header
+        [mutableRequest addValue:value forHTTPHeaderField:key];
+        
+    }
+    
+    // load the new mutable request
+    [webView loadRequest:mutableRequest];
+    
+    // cancel the existing request
+    return NO;
 }
 
 @end
