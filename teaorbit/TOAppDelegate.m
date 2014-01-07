@@ -2,20 +2,24 @@
 //  TOAppDelegate.m
 //  teaorbit
 //
-//  Created by Murat Ayfer on 12/11/2013.
-//  Copyright (c) 2013 tea orbit. All rights reserved.
+//  Created by Murat Ayfer on 1/7/2014.
+//  Copyright (c) 2014 teaorbit. All rights reserved.
 //
 
 #import "TOAppDelegate.h"
+#import "TOViewController.h"
 
 @implementation TOAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    TOViewController *view = [[TOViewController alloc] init];
+    _window.rootViewController = view;
+    [_window makeKeyAndVisible];
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

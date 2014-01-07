@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FB339D921859935900378A71"
+               BlueprintIdentifier = "FB00BD90187C9A7A009B3E9D"
                BuildableName = "teaorbit.app"
                BlueprintName = "teaorbit"
                ReferencedContainer = "container:teaorbit.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FB339DB61859935900378A71"
+               BlueprintIdentifier = "FB00BDAB187C9A7A009B3E9D"
                BuildableName = "teaorbitTests.xctest"
                BlueprintName = "teaorbitTests"
                ReferencedContainer = "container:teaorbit.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FB339D921859935900378A71"
+            BlueprintIdentifier = "FB00BD90187C9A7A009B3E9D"
             BuildableName = "teaorbit.app"
             BlueprintName = "teaorbit"
             ReferencedContainer = "container:teaorbit.xcodeproj">
@@ -61,7 +61,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FB339D921859935900378A71"
+            BlueprintIdentifier = "FB00BD90187C9A7A009B3E9D"
             BuildableName = "teaorbit.app"
             BlueprintName = "teaorbit"
             ReferencedContainer = "container:teaorbit.xcodeproj">
@@ -79,7 +79,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FB339D921859935900378A71"
+            BlueprintIdentifier = "FB00BD90187C9A7A009B3E9D"
             BuildableName = "teaorbit.app"
             BlueprintName = "teaorbit"
             ReferencedContainer = "container:teaorbit.xcodeproj">

@@ -21,17 +21,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	NSString *fullURL = @"http://localhost:8001/dev01";
-    NSURL *url = [NSURL URLWithString:fullURL];
-    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-    [_TOWebView loadRequest:requestObj];
-    
+
+    _TOWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    NSString *url = @"http://teaorbit.com/dev01";
+    NSURL *nsurl = [NSURL URLWithString:url];
+    NSURLRequest *nsrequest = [NSURLRequest requestWithURL:nsurl];
+    [_TOWebView loadRequest:nsrequest];
+    [self.view addSubview:_TOWebView];
+
+    _TOWebView.delegate = self;
     bridge = [WebViewJavascriptBridge bridgeForWebView:_TOWebView handler:^(id data, WVJBResponseCallback responseCallback) {
         NSLog(@"Received message from javascript: %@", data);
         responseCallback(@"Right back atcha");
     }];
-    
-     _TOWebView.delegate = self;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView

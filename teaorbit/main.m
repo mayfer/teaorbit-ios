@@ -2,8 +2,8 @@
 //  main.m
 //  teaorbit
 //
-//  Created by Murat Ayfer on 12/11/2013.
-//  Copyright (c) 2013 tea orbit. All rights reserved.
+//  Created by Murat Ayfer on 1/7/2014.
+//  Copyright (c) 2014 teaorbit. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
