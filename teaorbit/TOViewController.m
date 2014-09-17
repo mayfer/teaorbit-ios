@@ -9,7 +9,8 @@
 #import "TOViewController.h"
 #import "WebViewJavascriptBridge.h"
 
-@interface TOViewController () {
+@interface TOViewController () <UIWebViewDelegate>
+{
     WebViewJavascriptBridge* bridge;
 }
 @property (strong, nonatomic) IBOutlet UIWebView *TOWebView;
@@ -18,34 +19,71 @@
 
 @implementation TOViewController
 
+#define DEFAULT_CHANNEL_KEY @"default_channel"
+
+-(void) saveChannel:(NSString *) channelName
+{
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    NSLog(@"saving channel %@", channelName);
+    [defaults setObject:channelName forKey:DEFAULT_CHANNEL_KEY];
+    [defaults synchronize];
+}
+
+-(NSString *) getChannel
+{
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    NSString *channelName = [defaults stringForKey:DEFAULT_CHANNEL_KEY];
+    NSLog(@"laoding channel %@", channelName);
+    return channelName;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    
+    NSString *channelName = [self getChannel];
+    if (channelName == nil) {
+        channelName = @"";
+    }
+    [self saveChannel:channelName];
 
     _TOWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    NSString *url = @"http://teaorbit.com/dev01";
+    NSString *url = [NSString stringWithFormat:@"http://safinaz.local:8001/%@", channelName];
     NSURL *nsurl = [NSURL URLWithString:url];
     NSURLRequest *nsrequest = [NSURLRequest requestWithURL:nsurl];
     [_TOWebView loadRequest:nsrequest];
     [self.view addSubview:_TOWebView];
 
     _TOWebView.delegate = self;
-    bridge = [WebViewJavascriptBridge bridgeForWebView:_TOWebView handler:^(id data, WVJBResponseCallback responseCallback) {
+    bridge = [WebViewJavascriptBridge bridgeForWebView:_TOWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
+        
         NSLog(@"Received message from javascript: %@", data);
-        responseCallback(@"Right back atcha");
+        
+        if ([data hasPrefix:@"channel:"]) {
+            NSString *newChannel = [data substringFromIndex:[@"channel:" length]];
+            [self saveChannel:newChannel];
+        }
+        //responseCallback(@"Right back atcha");
     }];
+    
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
 }
+
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
+    /*
     NSLog(@"Attempting to send shiet");
     [bridge send:@"Well hello there"];
     [bridge send:[NSDictionary dictionaryWithObject:@"Foo" forKey:@"Bar"]];
     [bridge send:@"Give me a response, will you?" responseCallback:^(id responseData) {
         NSLog(@"ObjC got its response! %@", responseData);
     }];
+    */
 }
 
 - (void)didReceiveMemoryWarning
