@@ -12,8 +12,10 @@
 @interface TOViewController () <UIWebViewDelegate>
 {
     WebViewJavascriptBridge* bridge;
+    UIImageView * imageview;
 }
 @property (strong, nonatomic) IBOutlet UIWebView *TOWebView;
+
 
 @end
 
@@ -37,6 +39,16 @@
     return channelName;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    imageview = [[UIImageView alloc]init];
+    [imageview setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    imageview.contentMode = UIViewContentModeScaleAspectFit;
+    [imageview setImage:[UIImage imageNamed:@"tea_red.png"]];
+    [self.view addSubview:imageview];
+    NSLog(@"SPLASH IS GONE");
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -49,11 +61,10 @@
     [self saveChannel:channelName];
 
     _TOWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    NSString *url = [NSString stringWithFormat:@"http://safinaz.local:8001/%@", channelName];
+    NSString *url = [NSString stringWithFormat:@"http://teaorbit.com/%@", channelName];
     NSURL *nsurl = [NSURL URLWithString:url];
     NSURLRequest *nsrequest = [NSURLRequest requestWithURL:nsurl];
     [_TOWebView loadRequest:nsrequest];
-    [self.view addSubview:_TOWebView];
 
     _TOWebView.delegate = self;
     bridge = [WebViewJavascriptBridge bridgeForWebView:_TOWebView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
@@ -72,6 +83,7 @@
 }
 
 
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -84,6 +96,8 @@
         NSLog(@"ObjC got its response! %@", responseData);
     }];
     */
+    [self.view addSubview:_TOWebView];
+    NSLog(@"Page loaded");
 }
 
 - (void)didReceiveMemoryWarning
